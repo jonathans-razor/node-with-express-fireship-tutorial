@@ -1,7 +1,11 @@
+const express = require("express");
+const app = express();
+const { readFile } = require("fs").promises;
 
-const myModule = require('./my-module');
+app.get("/", async (request, response) => {
+  response.send(await readFile("./home.html", "utf8"));
+});
 
-console.log(myModule)
-
-console.log("- Hello world from Fireship Node.js Quickstart.");
-
+app.listen(process.env.PORT || 3000, () =>
+  console.log(`App available on http://localhost:3000`)
+);
